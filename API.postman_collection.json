@@ -1,0 +1,501 @@
+{
+	"info": {
+		"_postman_id": "8b7f7a4e-9c93-43d7-a17c-c5f15624011c",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Vacancies",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/vacancies",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"vacancies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/vacancies/{{vacancyUUID}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"vacancies",
+								"{{vacancyUUID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "date_from",
+									"value": "2022-05-05",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "date_to",
+									"value": "2022-05-09",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "19.99",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "number_of_vacancies",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiUrl}}/vacancies",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"vacancies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "PATCH",
+									"type": "text"
+								},
+								{
+									"key": "date_from",
+									"value": "2022-06-10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiUrl}}/vacancies/{vacancyUUID}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"vacancies",
+								"{vacancyUUID}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/vacancies/{{vacancyUUID}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"vacancies",
+								"{{vacancyUUID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{adminToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/me",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IssueToken",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "kfrancikowski@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "asdasdasd",
+									"type": "text"
+								},
+								{
+									"key": "device_name",
+									"value": "Postman",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiUrl}}/issue-token",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"issue-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/register?name=Krystian&email=kfrancikowski@gmail.com&password=asdasdasd&password_confirmation=asdasdasd",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"register"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Krystian"
+								},
+								{
+									"key": "email",
+									"value": "kfrancikowski@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "asdasdasd"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "asdasdasd"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bookings",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/bookings",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/bookings/{{bookingUUID}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"bookings",
+								"{{bookingUUID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Calendar Info",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "date_from",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "date_to",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiUrl}}/bookings/calendar-info",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"bookings",
+								"calendar-info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "date_from",
+									"value": "2022-05-05",
+									"type": "text"
+								},
+								{
+									"key": "date_to",
+									"value": "2022-05-08",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiUrl}}/bookings",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/bookings/{{bookingUUID}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"bookings",
+								"{{bookingUUID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}",
+					"host": [
+						"{{apiUrl}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "apiUrl",
+			"value": "http://booking-api.test",
+			"type": "string"
+		},
+		{
+			"key": "vacancyUUID",
+			"value": "96d20abb-363f-440e-bd1b-127763160fb8",
+			"type": "string"
+		},
+		{
+			"key": "adminToken",
+			"value": "1|8uykTxS03f5D3ebEDOTgXGmB14LIsdUktCtjqIBU",
+			"type": "string"
+		},
+		{
+			"key": "userToken",
+			"value": "2|DP2knqRauCtwDwLqfmfdr2h6su31lxKk421RyjBV",
+			"type": "string"
+		},
+		{
+			"key": "bookingUUID",
+			"value": "68bd4872-48b3-423a-959c-6c8341cb523c",
+			"type": "string"
+		}
+	]
+}
