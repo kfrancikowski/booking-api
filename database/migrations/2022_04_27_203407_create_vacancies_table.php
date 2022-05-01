@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('vacancies', function (Blueprint $table) {
             $table->id();
-            $table->uuid();
+            $table->uuid()->unique();
             $table->date('date_from');
             $table->date('date_to');
             $table->integer('number_of_vacancies');

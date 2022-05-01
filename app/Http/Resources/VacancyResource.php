@@ -10,8 +10,8 @@ class VacancyResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'date_from' => $this->date_from,
-            'date_to' => $this->date_to,
+            'date_from' => $this->date_from->format('Y-m-d'),
+            'date_to' => $this->date_to->format('Y-m-d'),
             'number_of_vacancies' => $this->number_of_vacancies,
             'price' => $this->price,
             'created_at' => $this->created_at,

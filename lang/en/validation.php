@@ -135,6 +135,8 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    'vacancy_already_occupied' => 'Dates you provided are already have other vacancy definitions.',
+    'booking_dates_are_not_available' => 'Days you selected are not available to book.',
 
     /*
     |--------------------------------------------------------------------------

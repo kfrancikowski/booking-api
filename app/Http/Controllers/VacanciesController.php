@@ -8,21 +8,19 @@ use App\Http\Resources\VacancyResource;
 use App\Models\Vacancy;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class VacanciesController extends Controller
 {
-    public function index(): AnonymousResourceCollection
+    public function __construct()
     {
-        return VacancyResource::collection(Vacancy::all());
+        $this->authorizeResource(Vacancy::class);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreVacancyRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function index(): AnonymousResourceCollection
+    {
+        return VacancyResource::collection(Vacancy::paginate());
+    }
+
     public function store(StoreVacancyRequest $request): VacancyResource
     {
         $data = $request->validated();
@@ -42,7 +40,7 @@ class VacanciesController extends Controller
         return new VacancyResource($vacancy);
     }
 
-    public function update(UpdateVacancyRequest $request, Vacancy $vacancy)
+    public function update(UpdateVacancyRequest $request, Vacancy $vacancy): VacancyResource
     {
         $data = $request->validated();
 

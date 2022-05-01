@@ -2,63 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Vacancy;
-use Illuminate\Http\Request;
+use App\Http\Requests\BookingsSummaryRequest;
+use App\Http\Requests\StoreBookingRequest;
+use App\Http\Resources\BookingResource;
+use App\Models\Booking;
+use App\Services\BookingService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Carbon;
 
 class BookingsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function __construct(private readonly BookingService $bookingService) {
+        $this->authorizeResource(Booking::class);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function calendarInfo(BookingsSummaryRequest $request): JsonResponse
     {
+        $data = $request->validated();
 
+        $bookingOptions = $this->bookingService->getBookingOptionsByDates(Carbon::make($data['date_from']), Carbon::make($data['date_to']));
+
+        return response()->json($bookingOptions);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Vacancy  $vacancy
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Vacancy $vacancy)
+    public function index(): AnonymousResourceCollection
     {
-        //
+        return BookingResource::collection(Booking::paginate());
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Vacancy  $vacancy
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Vacancy $vacancy)
+    public function store(StoreBookingRequest $request): BookingResource
     {
-        //
+        $data = $request->validated();
+
+        $booking = $this->bookingService->bookFromTo(Carbon::make($data['date_from']), Carbon::make($data['date_to']));
+
+        return new BookingResource($booking);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Vacancy  $vacancy
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Vacancy $vacancy)
+    public function show(Booking $booking): BookingResource
     {
-        //
+        return new BookingResource($booking);
+    }
+
+    public function destroy(Booking $booking)
+    {
+        $booking->delete();
+
+        return response()->json(null, 204);
     }
 }

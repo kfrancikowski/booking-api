@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Booking;
+use App\Models\User;
 use App\Models\Vacancy;
+use App\Observers\BookingObserver;
+use App\Observers\UserObserver;
 use App\Observers\VacancyObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -27,6 +31,8 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $observers = [
         Vacancy::class => [VacancyObserver::class],
+        User::class => [UserObserver::class],
+        Booking::class => [BookingObserver::class],
     ];
 
     /**
