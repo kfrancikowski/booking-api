@@ -24,6 +24,6 @@ I've made feature tests for Booking and Vacancies endpoints. It will provide the
 - Some of more sophisticated Request Validators were made as custom ones, they are in \app\Rules.
 - I've put @property for Models in class'es comment section for better code completion by PHP Storm.
 - User Roles are stored as Enum instead of const (ap\Enums)
-- database foreign keys are defined in migration and in Models as well.
+- database foreign keys are defined in migration and in Models as well (relations).
 ## How to use API
 There is a Postman collection file in repo to get full list of endpoints.
