@@ -1,19 +1,22 @@
 # booking-api
 
 ## Installation
-- add booking-api.test domain to your Hosts file.
-- Run `composer install`
-- Copy `.env.example` to `.env` and fill the APP_KEY value by using `php artisan key:generate`
-- Run docker by using `./vendor/bin/sail up` command
-- Run `./vendor/bin/sail artisan migrate` to run all migrations
-- Run database seeder `./vendor/bin/sail artisan seed --class=AdminUser` to create a basic Admin account (email: `admin@booking-api.test`, password: `secret`)
+- Add booking-api.test domain to your Hosts file.
+- Clone the repository
+- Go to project folder and run `composer install`
+- Copy `.env.example` to `.env`
+- Run docker by using `./vendor/bin/sail up` command. Add -d for detached mode.
+- Run `./vendor/bit/sail artisan key:generate` to fill APP_KEY in .env file.
+- Run `./vendor/bin/sail artisan migrate` to run all migrations.
+- Run database seeder `./vendor/bin/sail artisan seed --class=AdminUser` to create a basic Admin account (email: `admin@booking-api.test`, password: `secret`).
+- To receive a token to use in Postman for admin or client you need to use Authentication/IssueToken endpoint to login and receive a token (3 fields are required: email, password and device_name).
 
 ## Additional packages used
 - Laravel Sail - used to provide Docker configuration.
 - Laravel Sanctum - used to provide API Authorization and Authentication (all necesary endpoints like login/register and API Bearer Token auth).
 
 ## Tests
-I've made feature tests for Booking and Vacancies endpoints. It will provide the good amount of test coverage.
+I've made feature tests for Booking and Vacancies endpoints, written in PHP Unit. It will provide the good amount of test coverage. To run the tests you can use a Laravel command: `./vendor/bin/sail artisan test` 
 
 ## Used Solutions
 - Authentication is made with Policies (different access to each endpoint according to user role in table column users.role and ownership; app\Policies).
