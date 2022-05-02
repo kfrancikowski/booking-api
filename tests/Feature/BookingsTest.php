@@ -76,11 +76,17 @@ class BookingsTest extends TestCase
         $clientUser = User::factory()->create([
             'role' => UserRoles::CLIENT
         ]);
-        $booking = Booking::factory()->create();
 
-        $this->delete(route('bookings.destroy', ['booking' => $booking]))->assertStatus(401);
-        $this->actingAs($clientUser)->delete(route('bookings.destroy', ['booking' => $booking]))->assertStatus(204);
-        $this->actingAs($adminUser)->delete(route('bookings.destroy', ['booking' => $booking]))->assertStatus(204);
+        $booking1 = Booking::factory()->create([
+            'user_id' => $clientUser->id
+        ]);
+        $booking2 = Booking::factory()->create([
+            'user_id' => $clientUser->id
+        ]);
+
+        $this->delete(route('bookings.destroy', ['booking' => $booking1]))->assertStatus(401);
+        $this->actingAs($clientUser)->delete(route('bookings.destroy', ['booking' => $booking1]))->assertStatus(204);
+        $this->actingAs($adminUser)->delete(route('bookings.destroy', ['booking' => $booking2]))->assertStatus(204);
     }
 
     public function testStore(): void
@@ -92,8 +98,8 @@ class BookingsTest extends TestCase
         $vacancy = Vacancy::factory()->create();
 
         $this->actingAs($clientUser)->post(route('bookings.store'), [
-            'date_from' => $vacancy->date_from->addDays(2),
-            'date_to' =>$vacancy->date_from->addDays(5)
-        ])->assertStatus(200);
+            'date_from' => $vacancy->date_from->addDays(2)->format('Y-m-d'),
+            'date_to' =>$vacancy->date_from->addDays(5)->format('Y-m-d')
+        ])->assertStatus(201);
     }
 }
