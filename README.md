@@ -30,3 +30,11 @@ I've made feature tests for Booking and Vacancies endpoints, written in PHP Unit
 - database foreign keys are defined in migration and in Models as well (relations).
 ## How to use API
 There is a Postman collection file in repo to get full list of endpoints.
+- Login to admin account by using Authentication/IssueToken endpoint and save the token to collection variables as adminToken.
+- You will also need an account with Client role to perform booking. To make this account you can use Authentication/Register endpoint and then receive a token using Authentication/IssueToken endpoint. Save it to collection variables as userToken.
+- First you have to set some vacancies. To do it use API CRUD in Vacancies collection. Each vacancy period have date_from, date_to, price and number_of_vacancies fields. Vacancies can't overlap each other.
+- Then you can use:
+-- Bookings/Calendar Info to get informations what days are available to book, how much do they cost and how many vacancies are available each day.
+-- Bookings/Store to put a booking for specific days. It require Client account and two fields: date_from and date_to. As the result you will receive an information about booking with price and other basic informations.
+-- Bookings/Destroy to cancel your booking. Client can cancel only own bookings.
+
